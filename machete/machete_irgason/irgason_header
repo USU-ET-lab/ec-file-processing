@@ -1,0 +1,2 @@
+"Yr","DOY","Hr_Min","Sec_decsec","Ux","Uy","Uz","Ts","diag_sonic","CO2","H2O","diag_irga","CO2_density_slowT","Tc","amb_tmpr","amp_press","CO2_sig_strgth","H2O_sig_strgth"
+"yr","doy","hrmin","s","m/s","m/s","m/s","C","arb","mg/m^3","g/m^3","arb","arb","C","C","kPa","%","%"
