@@ -12,7 +12,7 @@
         integer, parameter :: dp=kind(1.0d0)
         integer, Parameter :: Medium=Selected_INT_Kind(6)
         integer(kind=Medium) :: stat,nw1,nw2,nw,i,j,k,l,n,jj,day,year(80000),doy(80000),hrmin(80000),hr,finish,oldhr
-        integer(kind=Medium) ::  nrecord,ix1,ix2,del,kk
+        integer(kind=Medium) ::  nrecord,ix1,ix2,del,kk,ik
         integer(kind=Medium) :: Ux_skip=0.0,Uy_skip=0.0,Uz_skip=0.0,Ts_skip=0.0,rhov_skip=0.0,rhoc_skip=0.0
         integer, Parameter :: Long=Selected_INT_Kind(9)
         Integer(Kind=Long) diag_sonic(80000),diag_irga(80000)
@@ -358,7 +358,7 @@
         else
         Ux_skip=Ux_skip+1
         if(Ux_skip>60) then
-        Ux-skip=0
+        Ux_skip=0
         end if
 
         end if
@@ -412,7 +412,6 @@
 
         end do
 
-        end if
 
         else
         Uy_skip=1
@@ -423,7 +422,7 @@
         else
         Uy_skip=Uy_skip+1
         if(Uy_skip>60) then
-        Uy-skip=0
+        Uy_skip=0
         end if
 
         end if
@@ -475,7 +474,6 @@
 
         end do
 
-        end if
 
         else
         Uz_skip=1
@@ -486,7 +484,7 @@
         else
         Uy_skip=Uy_skip+1
         if(Uy_skip>60) then
-        Uy-skip=0
+        Uy_skip=0
         end if
 
         end if
@@ -538,7 +536,6 @@
 
         end do
 
-        end if
 
         else
         Ts_skip=1
@@ -549,14 +546,11 @@
         else
         Ts_skip=Ts_skip+1
         if(Uy_skip>60) then
-        Ts-skip=0
+        Ts_skip=0
         end if
 
         end if
 
-        else
-        Ts_skip=1
-        end if
 
 !
 !  Same Procedure for rhov Values
@@ -609,7 +603,6 @@
 
         end do
 
-        end if
 
         else
         rhov_skip=1
@@ -620,7 +613,7 @@
         else
         rhov_skip=rhov_skip+1
         if(rhov_skip>60) then
-        rhov-skip=0
+        rhov_skip=0
         end if
 
         end if
@@ -675,7 +668,6 @@
 
         end do
         
-        end if
 
         else
         rhoc_skip=1
@@ -686,7 +678,7 @@
         else
         rhoc_skip=rhoc_skip+1
         if(rhoc_skip>60) then
-        rhoc-skip=0
+        rhoc_skip=0
         end if
 
         end if
