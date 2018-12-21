@@ -66,7 +66,7 @@
 !  Specify the Direction of the CSAT and Height of Sensors
 !
  
-	sonic_dir=226
+	sonic_dir=221
 	z=2.78
 
 !

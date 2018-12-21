@@ -11,7 +11,7 @@ import os
 import csv
 import multiprocessing
 from dask.distributed import Client
-from file_utils import read_header
+from . file_utils import read_header
 
     
 class toa5_convert_dask(object):
@@ -227,11 +227,11 @@ class ec_file_convert(object):
         '''
         Read in header from csv file
         
-        Keyword arguments:
-        in_dir : url for header file
+        Inputs:
+            in_dir : url for header file
         
         Returns:
-        ts_header: list of variable names to be used as header in pd.read_csv
+            ts_header : list of variable names to be used as header in pd.read_csv
         
         General header format:
         var1,vqr2,var3,...,varn
@@ -257,21 +257,21 @@ class ec_file_convert(object):
                       header=False,float_format='%g')
         print(f'Finished writing csv files to {out_url}')
         
-    def _check_na(self,df,thresh=.30):
+    def _check_na(self,df,thresh=.75):
         '''
         Internal function to nan out entire hour if there are a certain amount of missing values.
         
-        Inputs
-        param df (pd.DataFrame) : 
-        param thresh (float) : 
+        Inputs:
+            param df (pd.DataFrame) : 
+            param thresh (float) : 
         '''
         
-        grouped = df.isnull().groupby(df.index.hour).sum().max(axis=1) / 72000.
-        all_hrs = pd.Series(np.where(grouped.values >= 0.25,True,False),index=grouped.index)
+        grouped = df.notnull().groupby(df.index.hour).sum().min(axis=1) / 72000.
+        all_hrs = pd.Series(np.where(grouped.values >= thresh, True,False),index=grouped.index)
     
-        good_hrs = all_hrs[all_hrs==False].index.tolist()
+        good_hrs = all_hrs[all_hrs==True].index.tolist()
         
-        print(all_hrs[all_hrs==True].index.tolist())
+        print('Bad Hours: ',all_hrs[all_hrs==False].index.tolist())
         
         return df[df.index.hour.isin(good_hrs)]
     
@@ -281,8 +281,8 @@ class ec_file_convert(object):
         '''
         
         for f in self.file_list:
-            print(f)
             temp_df = pd.read_csv(f,names=self.header,index_col=[0],**file_kwargs)
+            print(temp_df.index.dayofyear[0])
             if temp_df.shape[0] <= 1:
                 continue
 

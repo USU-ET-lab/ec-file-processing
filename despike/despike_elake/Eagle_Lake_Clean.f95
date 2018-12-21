@@ -4,7 +4,7 @@
 
         implicit none
 
-        character (len=25) infile,outfile1,outfile2,dfile
+        character (len=25) dfile !outfile1,infile,outfile2
         character (len=6) site
         character (len=3) cdoy
         character (len=1) response
@@ -12,6 +12,10 @@
         character(len=*), parameter :: c_red = '[31m'
         character(len=*), parameter :: c_bold = '[1m'
         character(len=*), parameter :: c_reset = '[0m'
+        character(*), parameter :: indir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_16/fort_v02/'
+        character(*), parameter :: outdir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_16/fort_v03/'
+        character(*), parameter :: d_dir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_16/despike_vals/'
+        character(*), parameter :: tmpfile='temp.dat'
         
 
         integer, parameter :: dp=kind(1.0d0)
@@ -40,22 +44,26 @@
        
         write (6,'(A12)') 'Site and DOY'
         read (5,*) site,day
-
-        write (6,'(A22)') 'Name of the input file'
-        read (5,*) infile
-        open(1,file=infile)
-
-        write (6,'(/,A53)') 'Name of the intermediate file made using first window'
-        read (5,*) outfile1
-
-        write (6,'(/,A22)') 'Name of the final file'
-        read (5,*) outfile2
-        open(2,file=outfile1,action='READWRITE')
-        open(4,file=outfile2,action='WRITE')
-
         write(cdoy,"(I3)") day
-        write(dfile,"(a20)")("d"//site//cdoy//".dat")
-        open(3,file=dfile)
+
+        !write (6,'(A22)') 'Name of the input file'
+        !read (5,*) infile
+        !open(1,file=infile)
+
+        !Open
+        open(1,file=indir//"el18"//cdoy//"_v02.csv")
+
+        !write (6,'(/,A53)') 'Name of the intermediate file made using first window'
+        !read (5,*) outfile1
+
+        !write (6,'(/,A22)') 'Name of the final file'
+        !read (5,*) outfile2
+        open(2,file=tmpfile,action='READWRITE')
+        open(4,file=outdir//"el18"//cdoy//"_v03.csv",action='WRITE',status='unknown')
+
+
+        write(dfile,*)("despike_"//cdoy//".dat")
+        open(3,file=d_dir//dfile)
 
         write (6,'(/,A61)') 'Size of the 1st and 2nd Window & Critical Standard Deviation Value'
         read (5,*) nw1,nw2,sdev

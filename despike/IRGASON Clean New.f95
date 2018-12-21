@@ -46,10 +46,10 @@
         write (6,'(/,A22)') 'Name of the final file'
         read (5,*) outfile2
         open(2,file=outfile1,action='READWRITE')
-        open(4,file=outfile2,action='WRITE')
+        open(4,file=outfile2,action='WRITE',status='unknown')
 
         write(cdoy,"(I3)") day
-        write(dfile,"(a20)")("d"//site//cdoy//".dat")
+        write(dfile,"(a20)")("d_"//site//cdoy//".dat")
         open(3,file=dfile)
 
         write (6,'(/,A61)') 'Size of the 1st and 2nd Window & Critical Standard Deviation Value'
