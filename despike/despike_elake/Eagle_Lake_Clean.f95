@@ -12,9 +12,9 @@
         character(len=*), parameter :: c_red = '[31m'
         character(len=*), parameter :: c_bold = '[1m'
         character(len=*), parameter :: c_reset = '[0m'
-        character(*), parameter :: indir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_16/fort_v02/'
-        character(*), parameter :: outdir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_16/fort_v03/'
-        character(*), parameter :: d_dir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_16/despike_vals/'
+        character(*), parameter :: indir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_18/fort_v02/'
+        character(*), parameter :: outdir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_18/fort_v03/'
+        character(*), parameter :: d_dir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_18/despike_vals/'
         character(*), parameter :: tmpfile='temp.dat'
         
 
@@ -606,61 +606,61 @@
 !  Same Procedure for rhoc Values
 !
 
-        if(rhoc_skip==0) then
-
-        if((ABS(sdrhoc(k)).GT.sdev).or.(ABS(delrhoc(k)).GT.drhoc).or.(ABS(drhocw(k)).GT.drhoc)) then
-        do jj=60,1,-1
-        write(6,160) (-jj),hrmin(k-jj),sec(k-jj),rhoc(k-jj)
-  160   format(I3,2x,I4,2x,F5.2,4x,F6.1)
-        end do
-
-        write(6,'(A1)') ' '
-        write(6,146) c_esc,c_red,c_esc,c_bold,c_esc,hrmin(k),sec(k),rhoc(k),sdrhoc(k),delrhoc(k),c_esc,c_reset
-  146   format(a1,a4,a1,a3,a1,'   0',2x,I4,2x,F5.2,4x,F6.2,3x,'rhoc',4x,'SD = ',F4.1,2x,'Del=  ',F4.1,a1,a3)
-        write(6,'(A1)') ' '
-
-        do jj=1,60
-        write(6,160)(jj),hrmin(k+jj),sec(k+jj),rhoc(k+jj)
-        end do
-
-        write(6,'(A30)', advance="no") 'Problem?  Enter Y or N    '
-        read(5,*) response
-
-        if(response=='Y'.or.response=='y') then
-        rhoc_skip=0
-        write(6,'(A39)',advance="no") 'First and last index to be replaced    '
-        read(5,*) ix1,ix2
-        nbeg=rhoc(k+ix1-1)
-        nend=rhoc(k+ix2+1)
-        diff=nend-nbeg
-        kk=0
-        do jj=ix1,ix2,1
-        kk=kk+1
-
-        write(3,410) hrmin(k+jj),sec(k+jj),rhoc(k+jj)
-   410  format('original'  I4,2x,F5.2,2x,'rhoc= ',F8.3)
-
-        if((ix1>0.and.ix2>0).or.(ix1<0.and.ix2<0)) then
-        rhoc(k+jj)=nbeg+kk*(diff/ABS(ix1+ix2))
-        else
-        rhoc(k+jj)=nbeg+kk*(diff/(ABS(ix1)+ix2+2))
-        end if
-
-        write(3,411) hrmin(k+jj),sec(k+jj),rhov(k+jj)
-   411  format('new'  I4,2x,F5.2,2x,'rhoc= ',F7.3)
-
-        end do
-
-        else
-        rhoc_skip=rhoc_skip+1
-        if(rhoc_skip>60) then
-        rhoc_skip=0
-        end if
-        end if
-        
-        end if
-        
-        end if
+!        if(rhoc_skip==0) then
+!
+!        if((ABS(sdrhoc(k)).GT.sdev).or.(ABS(delrhoc(k)).GT.drhoc).or.(ABS(drhocw(k)).GT.drhoc)) then
+!        do jj=60,1,-1
+!        write(6,160) (-jj),hrmin(k-jj),sec(k-jj),rhoc(k-jj)
+!  160   format(I3,2x,I4,2x,F5.2,4x,F6.1)
+!        end do
+!
+!        write(6,'(A1)') ' '
+!        write(6,146) c_esc,c_red,c_esc,c_bold,c_esc,hrmin(k),sec(k),rhoc(k),sdrhoc(k),delrhoc(k),c_esc,c_reset
+!  146   format(a1,a4,a1,a3,a1,'   0',2x,I4,2x,F5.2,4x,F6.2,3x,'rhoc',4x,'SD = ',F4.1,2x,'Del=  ',F4.1,a1,a3)
+!        write(6,'(A1)') ' '
+!
+!        do jj=1,60
+!        write(6,160)(jj),hrmin(k+jj),sec(k+jj),rhoc(k+jj)
+!        end do
+!
+!        write(6,'(A30)', advance="no") 'Problem?  Enter Y or N    '
+!        read(5,*) response
+!
+!        if(response=='Y'.or.response=='y') then
+!        rhoc_skip=0
+!        write(6,'(A39)',advance="no") 'First and last index to be replaced    '
+!        read(5,*) ix1,ix2
+!        nbeg=rhoc(k+ix1-1)
+!        nend=rhoc(k+ix2+1)
+!        diff=nend-nbeg
+!        kk=0
+!        do jj=ix1,ix2,1
+!        kk=kk+1
+!
+!        write(3,410) hrmin(k+jj),sec(k+jj),rhoc(k+jj)
+!   410  format('original'  I4,2x,F5.2,2x,'rhoc= ',F8.3)
+!
+!        if((ix1>0.and.ix2>0).or.(ix1<0.and.ix2<0)) then
+!        rhoc(k+jj)=nbeg+kk*(diff/ABS(ix1+ix2))
+!        else
+!        rhoc(k+jj)=nbeg+kk*(diff/(ABS(ix1)+ix2+2))
+!        end if
+!
+!        write(3,411) hrmin(k+jj),sec(k+jj),rhov(k+jj)
+!   411  format('new'  I4,2x,F5.2,2x,'rhoc= ',F7.3)
+!
+!        end do
+!
+!        else
+!        rhoc_skip=rhoc_skip+1
+!        if(rhoc_skip>60) then
+!        rhoc_skip=0
+!        end if
+!        end if
+!        
+!        end if
+!        
+!        end if
 
         end do
 

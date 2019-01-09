@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Fx3>
+<Fx3 version="1.2.1">
+    <ProgramList>
+        <Name>/Users/miksch/git/ec-file-processing/despike/despike_elake/despike_elake</Name>
+        <Arguments></Arguments>
+        <WorkingDirectory>/Users/miksch/git/ec-file-processing/despike/despike_elake</WorkingDirectory>
+        <EnvironmentList></EnvironmentList>
+        <Script></Script>
+        <Type>append</Type>
+    </ProgramList>
+    <AddPaths>
+        <Path>&quot;/Users/miksch/git/ec-file-processing/despike/despike_elake&quot;</Path>
+    </AddPaths>
+    <WatchVariables/>
+    <BreakpointList/>
+    <Memory>
+        <address></address>
+        <bytes>1</bytes>
+        <column>1</column>
+        <word>1</word>
+        <checked>N</checked>
+    </Memory>
+    <IgnoredSources>
+        <IgnoredList/>
+        <Unlocatable>N</Unlocatable>
+    </IgnoredSources>
+    <Arguments>
+        <Argument></Argument>
+    </Arguments>
+</Fx3>

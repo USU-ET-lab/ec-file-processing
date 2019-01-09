@@ -28,12 +28,29 @@ def read_header(in_url):
 
 def fort_date_secs(yr,doy,hr,sec):
     '''
-    Date parser for pandas.read_csv when year, doy, hrmin, and sec columns are there
+    Date parser for pandas.read_csv when yr, doy, hr, and sec are the time columns
     '''
-    return pd.datetime.strptime(f'{yr}{doy}{int(hr):04}{float(sec):.2f}', '%Y%j%H%M%S.%f')
+    if '2400' in hr:
+        hr = '000'
+        return pd.datetime.strptime(f'{yr}{int(doy)+1}{int(hr):04}{float(sec):.2f}', '%Y%j%H%M%S.%f')
+    else:
+        return pd.datetime.strptime(f'{yr}{doy}{int(hr):04}{float(sec):.2f}', '%Y%j%H%M%S.%f')
 
-def fort_dates_hours(yr,doy,hr):
+def fort_date_hours(yr,doy,hr):
+    '''
+    Date parser for pandas.read_csv when yr, doy, and hr are the time columns
+    '''
+    if '2400' in hr:
+        hr = '000'
+        return pd.datetime.strptime(f'{yr}{int(doy)+1}{int(hr):04}', '%Y%j%H%M')
+    else:
+        return pd.datetime.strptime(f'{yr}{doy}{int(hr):04}', '%Y%j%H%M')
+    
+def merge_cols(df,old_cols,new_col):
+    '''
+    Merges multiple columns with non-overlapping points together
     '''
     
-    '''
-    return pd.datetime.strptime(f'{yr}{doy}{int(hr):04}', '%Y%j%H%M')
+    merged = pd.concat([df[old] for old in old_cols]).rename(new_col).dropna()
+    merged = merged.where(merged<1.)
+    return merged

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Fx3>
+<Fx3 version="1.2.1">
+    <ProgramList>
+        <Name></Name>
+        <Arguments></Arguments>
+        <WorkingDirectory></WorkingDirectory>
+        <EnvironmentList></EnvironmentList>
+        <Script></Script>
+        <Type>append</Type>
+    </ProgramList>
+    <AddPaths/>
+    <WatchVariables/>
+    <BreakpointList/>
+    <Memory>
+        <address></address>
+        <bytes>512</bytes>
+        <column>16</column>
+        <word>1</word>
+        <checked>Y</checked>
+    </Memory>
+    <IgnoredSources>
+        <IgnoredList/>
+        <Unlocatable>N</Unlocatable>
+    </IgnoredSources>
+    <Arguments>
+        <Argument></Argument>
+    </Arguments>
+</Fx3>
