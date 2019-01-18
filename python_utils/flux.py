@@ -12,7 +12,7 @@ def fort_to_csv(in_files, out_file, in_kwargs=None, out_kwargs=None):
     if not in_kwargs:
         
         in_kwargs = dict(parse_dates={'TIMESTAMP':[0,1,2]}, date_parser=fort_date_hours,
-                        na_values=['*****','NAN'], index_col=['TIMESTAMP'],  
+                        na_values=['*****','******','NAN'], index_col=['TIMESTAMP'],  
                         delim_whitespace=True, header=0, skipfooter=3, engine='python')
     
     

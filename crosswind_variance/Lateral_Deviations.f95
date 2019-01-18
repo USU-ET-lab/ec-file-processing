@@ -28,7 +28,7 @@
 !
 !  Direction CSAT is Pointed Towards
 !
-                CSAT_dir=270.0
+                CSAT_dir=220.0
 
 
                 radians=pi/180.0
