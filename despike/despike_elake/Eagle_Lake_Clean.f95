@@ -76,10 +76,10 @@
 	duy=8.0
 
 !  Uz in m/s
-	duz=4.0
+	duz=5.0
 
 !  Tsonic in C
-	dTs=4.0
+	dTs=5.0
 
 !  rhov in gm/m3
   drhov=5.0
@@ -89,7 +89,7 @@
 
 
 !  Upper and lower coefficients for the if statements
-        sdev_hi=1.3
+        sdev_hi=1.5
         sdev_low=.6
         
         del_hi=1.6
@@ -238,23 +238,23 @@
 !  Determine Number of Standard Deviations Away From Window Average
 !
 
-        sdux(k)=(ux(k)-uxavg)/stdevux
-        sduy(k)=(uy(k)-uyavg)/stdevuy
-        sduz(k)=(uz(k)-uzavg)/stdevuz
-        sdTs(k)=(Ts(k)-Tsavg)/stdevTs
-        sdrhov(k)=(rhov(k)-rhovavg)/stdevrhov
-        sdrhoc(k)=(rhoc(k)-rhocavg)/stdevrhoc
+        sdux(k)=ABS(ux(k)-uxavg)/stdevux
+        sduy(k)=ABS(uy(k)-uyavg)/stdevuy
+        sduz(k)=ABS(uz(k)-uzavg)/stdevuz
+        sdTs(k)=ABS(Ts(k)-Tsavg)/stdevTs
+        sdrhov(k)=ABS(rhov(k)-rhovavg)/stdevrhov
+        sdrhoc(k)=ABS(rhoc(k)-rhocavg)/stdevrhoc
                   
 !
 !  Calculate Difference From Instantaneous Values From Window Average
 !
 
-        duxw(k)=ux(k)-Uxavg
-        duyw(k)=uy(k)-Uyavg
-        duzw(k)=uz(k)-Uzavg
-        dTsw(k)=Ts(k)-Tsavg
-        drhovw(k)=rhov(k)-rhovavg
-        drhocw(k)=rhoc(k)-rhocavg
+        duxw(k)=ABS(ux(k)-Uxavg)
+        duyw(k)=ABS(uy(k)-Uyavg)
+        duzw(k)=ABS(uz(k)-Uzavg)
+        dTsw(k)=ABS(Ts(k)-Tsavg)
+        drhovw(k)=ABS(rhov(k)-rhovavg)
+        drhocw(k)=ABS(rhoc(k)-rhocavg)
 
 !
 !  For Each Variable, Check if Values Exceed Standard Deviations and Absolute Difference Limits
