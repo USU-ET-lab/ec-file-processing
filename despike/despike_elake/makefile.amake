@@ -30,7 +30,7 @@ ABSOFT_F95_LINKER_FLAGS=-IPA:debug=on -IPA:source_pu_order=on                 -s
 #
 # Name of the executable
 #
-TARGET=despike_elake
+TARGET=despike_elake_highrhov
 OUTDIR=.
 OBJDIR=./Release
 
@@ -38,7 +38,7 @@ OBJDIR=./Release
 # Files for this executable
 #
 VAST_PREPROCESSOR_FILES=
-ABSOFT_F95_FILES="Eagle_Lake_Clean.f95"
+ABSOFT_F95_FILES="Eagle_Lake_Clean_highrhov.f95"
 ABSOFT_F77_FILES=
 GCC_FILES=
 ABSOFT_F95_LINKER_FILES=
@@ -49,7 +49,7 @@ MAKE_FILES=
 # Rules and dependencies for the executable
 #
 SRCFILES=$(ABSOFT_F95_FILES)
-OBJFILES="$(OBJDIR)/Eagle_Lake_Clean.o"
+OBJFILES="$(OBJDIR)/Eagle_Lake_Clean_highrhov.o"
 all: "$(OBJDIR)" "$(OUTDIR)/$(TARGET)"
 	
 
@@ -58,8 +58,8 @@ all: "$(OBJDIR)" "$(OUTDIR)/$(TARGET)"
 
 
 
-"$(OBJDIR)/Eagle_Lake_Clean.o": "Eagle_Lake_Clean.f95"
-	$(ABSOFT_F95) -c -nowdir -YLOOP_ANALYZER -LNO:simd_verbose=on -LNO:apo_verbose=on -CG:filetable_verbose=on $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/Eagle_Lake_Clean.o" "Eagle_Lake_Clean.f95"
+"$(OBJDIR)/Eagle_Lake_Clean_highrhov.o": "Eagle_Lake_Clean_highrhov.f95"
+	$(ABSOFT_F95) -c -nowdir -YLOOP_ANALYZER -LNO:simd_verbose=on -LNO:apo_verbose=on -CG:filetable_verbose=on $(ABSOFT_F95_FLAGS) -o "$(OBJDIR)/Eagle_Lake_Clean_highrhov.o" "Eagle_Lake_Clean_highrhov.f95"
 
 "$(OBJDIR)":
 	$(MKDIR) "$(OBJDIR)"
@@ -84,7 +84,7 @@ ScanAll: "$(OUTDIR)" "$(OBJDIR)" MakeDepsAll
 # Scan for all F77/F95, and c/c++ dependencies
 #
 MakeDepsAll:
-	$(MKDEP) -quiet "-pre./Release/" -Y -modInfo -errdel -f90 -f makefile.amake -a -info          -O2 -m32 -stack:1f40000 -info "Eagle_Lake_Clean.f95" 
+	$(MKDEP) -quiet "-pre./Release/" -Y -modInfo -errdel -f90 -f makefile.amake -a -info          -O2 -m32 -stack:1f40000 -info "Eagle_Lake_Clean_highrhov.f95" 
 # DO NOT DELETE THIS LINE - makedepend depends upon it.
 
 

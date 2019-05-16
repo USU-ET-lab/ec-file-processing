@@ -275,6 +275,33 @@ class ec_file_convert(object):
         
         return df[df.index.hour.isin(good_hrs)]
     
+    
+        
+    def fort_to_csv(self,out_url,**file_kwargs):
+        '''
+        
+        '''
+        def fort_date_secs(yr,doy,hr,sec):
+            '''
+            Date parser for pandas.read_csv when yr, doy, hr, and sec are the time columns
+            '''    
+            if '2400' in hr:
+                hr = '000'
+                return pd.datetime.strptime(f'{yr}{int(doy)+1}{int(hr):04}{float(sec):.2f}', '%Y%j%H%M%S.%f')
+            else:
+                return pd.datetime.strptime(f'{yr}{doy}{int(hr):04}{float(sec):.2f}', '%Y%j%H%M%S.%f')
+        
+        for f in self.file_list:
+            print(f)
+            temp_df = pd.read_csv(f,sep='\s+',parse_dates={'TIMESTAMP':[0,1,2,3]},date_parser=fort_date_secs,
+                                  names=self.header,index_col=['TIMESTAMP'],**file_kwargs)
+            yr = str(temp_df.index.year[0])[2:]
+            doy = temp_df.index.dayofyear[0]
+            temp_df.to_csv(f'{out_url}{self.stat_id}{yr}{doy:03}_v{self.v_num:02}.csv',
+                           header=False,float_format='%g')
+
+        return None
+    
     def to_fortran_csv(self,out_url,drop_nans=True,**file_kwargs):
         '''
         Make sure to have list of column names so that it writes out properly
@@ -309,9 +336,20 @@ class ec_file_convert(object):
             
         print(f'Finished writing fortran-compatible csv files to {out_url}')
     
-    def to_parqet(self,out_url):
-        for doy,data in self.df.groupby(self.df.index.dayofyear):
-            data.to_parquet(f'{out_url}{self.stat_id}{yr}{doy}_{self.v_num}')
+    def to_parquet(self,out_url,**file_kwargs):
+        for f in self.file_list:
+            temp_df = pd.read_csv(f,names=self.header,index_col=[0],parse_dates=True,**file_kwargs)
+            print(temp_df.index.dayofyear[0])
+            
+            if temp_df.shape[0] <= 1:
+                continue
+            
+            yr =str(temp_df.index.year[0])[2:]
+            doy = temp_df.index.dayofyear[0]
+            
+            temp_df.to_parquet(f'{out_url}{self.stat_id}{yr}{doy:03}_v{self.v_num:02}.parquet',index=True,
+                               compression='gzip')
+            
         print(f'Finished writing parqet files to {out_url}')
     
     def clear_df(self):

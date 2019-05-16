@@ -13,9 +13,9 @@
         character(len=*), parameter :: c_red = '[31m'
         character(len=*), parameter :: c_bold = '[1m'
         character(len=*), parameter :: c_reset = '[0m'
-        character(*), parameter :: indir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_18/fort_v02/'
-        character(*), parameter :: outdir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_18/fort_v03/'
-        character(*), parameter :: d_dir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_18/despike_vals/'
+        character(*), parameter :: indir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_16/fort_v02/'
+        character(*), parameter :: outdir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_16/fort_v03/'
+        character(*), parameter :: d_dir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_16/despike_vals/'
         character(*), parameter :: tmpfile='temp.dat'
         
 
@@ -47,7 +47,7 @@
         !open(1,file=infile)
 
         !Open
-        open(1,file=indir//"el18"//cdoy//"_v02.csv")
+        open(1,file=indir//"el16"//cdoy//"_v02.csv")
 
         !write (6,'(/,A53)') 'Name of the intermediate file made using first window'
         !read (5,*) outfile1
@@ -55,7 +55,7 @@
         !write (6,'(/,A22)') 'Name of the final file'
         !read (5,*) outfile2
         open(2,file=tmpfile,action='READWRITE')
-        open(4,file=outdir//"el18"//cdoy//"_v03.csv",action='WRITE',status='unknown')
+        open(4,file=outdir//"el16"//cdoy//"_v03.csv",action='WRITE',status='unknown')
 
 
         write(dfile,*)("despike_"//cdoy//".dat")

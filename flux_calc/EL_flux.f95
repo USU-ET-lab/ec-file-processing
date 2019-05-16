@@ -70,7 +70,7 @@
 !  Specify the Direction of the CSAT and Height of Sensors
 !
  
-	sonic_dir=226
+	sonic_dir=214
 	z=2.78
 
 !
@@ -887,7 +887,7 @@
 	write (2,400) year,doy,hr,Tavg,Td,D,stdTa,wind_compass,V,ustar,zeta,H,LE,avgflux, &
         stdflux,varflux,skewflux,kurtflux,n
  400	format(I4,1x,I3,1x,I4,2x,F5.1,2x,F5.1,2x,F6.1,3x,F5.3,3x,F5.1,2x,F4.1,3x,F4.2,1x, &
-        F8.3,2x,F5.1,2x,F5.1,5x,E11.4,3x,E11.4,3x,E11.4,5x,F7.3,7x,F7.3,7x,I5)
+        F8.3,2x,F6.1,2x,F5.1,5x,E11.4,3x,E11.4,3x,E11.4,5x,F7.3,7x,F7.3,7x,I5)
 
 	i=1
 	sumx=0.0

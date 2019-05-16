@@ -7,7 +7,12 @@
 
                 implicit none
                 
-                character(len=24) in,out
+              	character(len=4) site
+              	character(len=3) cdoy
+               	character(len=*), parameter :: indir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_18/fort_v03/'
+              	character(len=*), parameter :: outdir='/Users/miksch/Thesis_Files/Processed/Eagle_Lake/EL_18/cross_var/'
+              	character(len=*), parameter :: file_pre='el18'
+              	
                 integer stat,year,doy,doyinit,hrmin,i,n,hr,minute,oldminute,oldhr,endhr
                 integer, parameter :: dp=kind(1.0d0)
                 real wind_compass(80000),sec,Uz,rn,CSAT_dir,radians,degrees,dir_mean
@@ -17,18 +22,22 @@
                 real(kind=dp) :: Y_normal,theta_normal,dir_normal,sumVn,sumVn2,sdevVn
                 real(kind=dp), parameter :: pi=2*ASIN(1.0)
                 
+             
                 
-                write (6,*) 'Name of the input file'
-                read (5,*) in
-                write (6,*) 'Name of the output file'
-                read (5,*) out
-                open(1,file=in)
-                open(2,file=out)
-                
+                write (6,'(/,A12)') 'Site and DOY '
+              	read (5,*) site,doy
+              	write(cdoy,"(I3)") doy
+              
+                !Open input file
+              	open(1,file=indir//file_pre//cdoy//"_v03.csv")
+              
+                !Open output file
+              	open(2,file=outdir//file_pre//cdoy//"_crosswind.csv")
+              
 !
 !  Direction CSAT is Pointed Towards
 !
-                CSAT_dir=220.0
+                CSAT_dir=214.0
 
 
                 radians=pi/180.0
